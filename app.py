@@ -41,11 +41,12 @@ def lat():
 @app.route('/val', methods=["POST", "GET"])
 def long():
     N = str(request.form.get("N"))
-    longitude_range = str(request.form.get("longss"))
-    ds = "SELECT TOP {} * FROM [dbo].[q2eq] WHERE longitude > {} ORDER BY mag DESC".format(
-        N, longitude_range)
-    ds1 = "SELECT TOP {} * FROM [dbo].[q2eq] WHERE longitude > {} ORDER BY mag".format(
-        N, longitude_range)
+    longitude_ranges = str(request.form.get("longss1"))
+    longitude_rangel = str(request.form.get("longss2"))
+    ds = "SELECT TOP {} * FROM [dbo].[q2eq] WHERE longitude BETWEEN {} AND {} ORDER BY mag DESC".format(
+        N, longitude_ranges, longitude_rangel)
+    ds1 = "SELECT TOP {} * FROM [dbo].[q2eq] WHERE longitude BETWEEN {} AND {} ORDER BY mag".format(
+        N, longitude_ranges, longitude_rangel)
     cursor.execute(ds)
     ftch = cursor.fetchall()
     cursor.execute(ds1)
