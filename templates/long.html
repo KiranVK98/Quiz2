@@ -21,6 +21,7 @@
               </tr>
             </tbody>
           </table>
+          <h1>N largest quakes</h1>
         <table class="table table-striped">
             <tr>
               <th>time</th>
@@ -30,6 +31,24 @@
               <th>Place</th>
             </tr>
             {% for items in dsp %}
+            <tr>
+                <td>{{items[0]}}</td>
+                <td>{{items[1]}}</td>
+                <td>{{items[2]}}</td>
+                <td>{{items[3]}}</td>
+                <td>{{items[4]}}</td>
+            {% endfor %}
+        </table>
+        <h1>N smallest quakes quakes</h1>
+        <table class="table table-striped">
+            <tr>
+              <th>time</th>
+              <th>latitude</th>
+              <th>longitude</th>
+              <th>id</th>
+              <th>Place</th>
+            </tr>
+            {% for items in dsp1 %}
             <tr>
               <td>{{items[0]}}</td>
               <td>{{items[1]}}</td>

@@ -36,7 +36,7 @@
       <div class="row">
         <form action="/lat" , method="POST" , method="GET">
           <div class="mb-3">
-            <label for="lat" class="form-label">Enter the latitude</label>
+            <label for="lat" class="form-label">Enter the longitude</label>
             <input
               type="text"
               class="form-control"
@@ -46,12 +46,41 @@
             />
           </div>
           <div class="mb-3">
-            <label for="long" class="form-label">Enter the longitude</label>
+            <label for="long" class="form-label">Enter the N</label>
             <input
               type="text"
               class="form-control"
               id="long"
               name="long"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <form action="/val" , method="POST" , method="GET">
+          <div class="mb-3">
+            <label for="N" class="form-label">Enter the N</label>
+            <input
+              type="text"
+              class="form-control"
+              id="N"
+              name="N"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="longss" class="form-label"
+              >Enter the longitude range</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="longss"
+              name="longss"
               aria-describedby="emailHelp"
             />
           </div>

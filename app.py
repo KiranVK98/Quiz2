@@ -6,7 +6,7 @@ server = 'kiran98.database.windows.net'
 database = 'Assignment12'
 username = 'kiran1998'
 password = 'Omsrn@062466'
-driver = '{ODBC Driver 17 for SQL Server}'
+driver = '{ODBC Driver 18 for SQL Server}'
 
 app = Flask(__name__)
 
@@ -30,12 +30,42 @@ def lat():
     degrees = str(request.form.get("long"))
     deviation_away = float(lat) - float(degrees)
     deviation_towards = float(lat) + float(degrees)
-    ds = "SELECT time,latitude FROM [dbo].[eq] WHERE latitude > {} and latitude < {}".format(
+    ds = "SELECT time,latitude,longitude,id,place FROM [dbo].[eq] WHERE longitude > {} and longitude < {}".format(
         deviation_away, deviation_towards)
     cursor.execute(ds)
     ftch = cursor.fetchall()
     print(ftch)
     return render_template('lat.html', dsp=ftch)
+
+
+@app.route('/val', methods=["POST", "GET"])
+def long():
+    N = str(request.form.get("N"))
+    longitude_range = str(request.form.get("longss"))
+    ds = "SELECT TOP {} * FROM [dbo].[q2eq] WHERE longitude > {} ORDER BY mag DESC".format(
+        N, longitude_range)
+    ds1 = "SELECT TOP {} * FROM [dbo].[q2eq] WHERE longitude > {} ORDER BY mag".format(
+        N, longitude_range)
+    cursor.execute(ds)
+    ftch = cursor.fetchall()
+    cursor.execute(ds1)
+    ftch1 = cursor.fetchall()
+    print(ftch)
+    return render_template('long.html', dsp=ftch, dsp1=ftch1)
+
+
+@app.route('/net', methods=["POST", "GET"])
+def net():
+    N = str(request.form.get("N"))
+    longitude_range = str(request.form.get("longss"))
+    ds = "SELECT net FROM [dbo].[q2eq] WHERE mag > {}".format(
+        N)
+    cursor.execute(ds)
+    ftch = cursor.fetchall()
+    cursor.execute(ds1)
+    ftch1 = cursor.fetchall()
+    print(ftch)
+    return render_template('long.html', dsp=ftch, dsp1=ftch1)
 
 
 if __name__ == '__main__':  # only run if you run this file, not if you import other main.py file
