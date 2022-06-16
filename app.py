@@ -57,16 +57,17 @@ def long():
 
 @app.route('/net', methods=["POST", "GET"])
 def net():
-    N = str(request.form.get("N"))
-    longitude_range = str(request.form.get("longss"))
-    ds = "SELECT net FROM [dbo].[q2eq] WHERE mag > {}".format(
-        N)
+    frmtime = str(request.form.get("t1"))
+    totime = str(request.form.get("t2"))
+    ds = "select TOP 5 * from [dbo].[q2eq] where time>='2022-06-16' and time_gmt > '{}:00' and time_gmt < '{}:00' ORDER BY mag DESC".format(
+        frmtime, totime)
+    ds1 = "select TOP 5 * from [dbo].[q2eq] where time>='2022-06-16' and time_gmt > '{}:00' and time_gmt < '{}:00' ORDER BY mag".format(
+        frmtime, totime)
     cursor.execute(ds)
     ftch = cursor.fetchall()
     cursor.execute(ds1)
     ftch1 = cursor.fetchall()
-    print(ftch)
-    return render_template('long.html', dsp=ftch, dsp1=ftch1)
+    return render_template('tim.html', dsp=ftch, dsp1=ftch1)
 
 
 if __name__ == '__main__':  # only run if you run this file, not if you import other main.py file
